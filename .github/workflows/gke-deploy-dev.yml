@@ -39,7 +39,7 @@ jobs:
         with:
           create_credentials_file: "true"
           workload_identity_provider: "projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider"
-          service_account: "github-actions-deployer@${{ env.GCP_PROJECT_ID }}.iam.gserviceaccount.com"
+          service_account: "mec-kaunsell-gke@aihubble.iam.gserviceaccount.com"
           access_token_lifetime: 1200s
 
       - name: gcloud auth login by workload identity
