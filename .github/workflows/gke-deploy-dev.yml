@@ -32,12 +32,11 @@ jobs:
           gcloud --quiet auth configure-docker
 
       # GKE 認証情報を取得して、クラスタにデプロイできるようにする(権限も必要)
-      - uses: google-github-actions/get-gke-credentials@v1
+      - id: "get-credentials"
+        uses: "google-github-actions/get-gke-credentials@v1"
         with:
-          project_id: ${{ secrets.GKE_PROJECT}}
-          cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}
-          credentials: ${{ secrets.GKE_SA_KEY }}
+          cluster_name: ${{ secrets.GKE_CLUSTER }}
+          location: ${{ secrets.GKE_ZONE }}
 
       # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する)
       - name: Build
