@@ -10,6 +10,7 @@ env:
   GCP_PROJECT_NUMBER: ${{ secrets.GCP_PROJECT_NUMBER }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
   GKE_ZONE: ${{ secrets.GKE_ZONE }}
+  GAR_LOCATION: asia-northeast1
   DEPLOYMENT_NAME: gke-test-rn
   IMAGE: hello-app-rn
   REGISTRY_HOSTNAME: asia.gcr.io
