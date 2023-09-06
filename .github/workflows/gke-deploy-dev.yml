@@ -38,6 +38,7 @@ jobs:
           project_id: ${{ secrets.GKE_PROJECT }}
           cluster_name: ${{ secrets.GKE_CLUSTER }}
           location: ${{ secrets.GKE_ZONE }}
+          credentials: ${{ secrets.GKE_SA_KEY }}
 
       # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する)
       - name: Build
