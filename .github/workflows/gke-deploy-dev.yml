@@ -31,7 +31,7 @@ jobs:
       - run: |-
           gcloud --quiet auth configure-docker
 
-      # GKE 認証情報を取得して、クラスタにデプロイできるようにする
+      # GKE 認証情報を取得して、クラスタにデプロイできるようにする(権限も必要)
       - uses: google-github-actions/get-gke-credentials@v0.2.1
         with:
           cluster_name: ${{ env.GKE_CLUSTER }}
