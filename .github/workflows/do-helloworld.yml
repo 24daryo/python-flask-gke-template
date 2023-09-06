@@ -11,4 +11,5 @@ jobs:
         with:
           python-version: "3.x"
       - name: Activate code
-        uses: run python main
+        uses: |
+          run python main
