@@ -63,9 +63,9 @@ jobs:
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v0
         with:
-          project_id: ${{ env.PROJECT_ID }}
-          cluster_name: ${{ env.GKE_CLUSTER }}
-          location: ${{ env.GKE_ZONE }}
+          project_id: aihubble
+          cluster_name: mec-kaunsell-gke
+          location: asia-northeast1-b
 
       # - name: gcloud auth login by workload identity
       #   run: |-
