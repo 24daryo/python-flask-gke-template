@@ -1,0 +1,45 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GKE_CLUSTER: サンプルクラスタ
+  GKE_CLUSTER_LOCATION: asia-northeast1
+  GKE_CONTAINER_NAME: サンプルコンテナ
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+        working-directory: ./flask-rest-api
+
+      - name: Run tests
+        run: |
+          python -m unittest tests/test_app.py
+        working-directory: ./flask-rest-api
+
+      - name: Deploy to GKE
+        uses: GoogleCloudPlatform/github-actions/deploy-gke@main
+        with:
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }} # aihubble
+          cluster: ${{ env.GKE_CLUSTER }} # サンプルクラスタ
+          location: ${{ env.GKE_CLUSTER_LOCATION }} # asia-northeast1
+          container: ${{ env.GKE_CONTAINER_NAME }} # サンプルコンテナ
+          image: gcr.io/${{ secrets.GCP_PROJECT_ID }}/flask-rest-api:${{ github.sha }}
+          port: 8080
