@@ -35,6 +35,7 @@ jobs:
       - id: "get-credentials"
         uses: "google-github-actions/get-gke-credentials@v1"
         with:
+          project_id: ${{ secrets.GKE_PROJECT }}
           cluster_name: ${{ secrets.GKE_CLUSTER }}
           location: ${{ secrets.GKE_ZONE }}
 
