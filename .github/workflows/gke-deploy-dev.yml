@@ -31,6 +31,13 @@ jobs:
       - run: |-
           gcloud --quiet auth configure-docker
 
+      # workload_identityで認証を通す
+      - id: "auth"
+        uses: "google-github-actions/auth@v1"
+        with:
+          workload_identity_provider: "projects/371891406471/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider"
+          service_account: "mec-kaunsell-gke@aihubble.iam.gserviceaccount.com "
+
       # GKE 認証情報を取得して、クラスタにデプロイできるようにする(権限も必要)
       - id: "get-credentials"
         uses: "google-github-actions/get-gke-credentials@v1"
@@ -38,7 +45,7 @@ jobs:
           project_id: ${{ secrets.GKE_PROJECT }}
           cluster_name: ${{ secrets.GKE_CLUSTER }}
           location: ${{ secrets.GKE_ZONE }}
-          credentials: ${{ secrets.GKE_SA_KEY }}
+          # credentials: ${{ secrets.GKE_SA_KEY }}
 
       # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する)
       - name: Build
