@@ -50,15 +50,10 @@ jobs:
           location: asia-northeast1
 
       # Dockerイメージにタグ（名前とバージョン）を付ける
-      - id: image-url
-        name: Create docker image url
-        run: |
-          echo "::set-output name=value::${{ env.REGISTRY_HOSTNAME }}/${{ env.PROJECT_ID }}/my-service:latest"
-
       # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する)
       - name: Build a docker image
         run: |
-          docker build -t ${{ steps.image-url.outputs.value }} .
+          docker build -tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" .
 
       # これがないとDockerイメージをプッシュできないので、認証を通しておく
       - name: Configure docker to use the gcloud cli
@@ -66,7 +61,7 @@ jobs:
 
       # Docker イメージを Google Container Registry にプッシュする
       - name: Push the docker image to Container Registry
-        run: docker push ${{ steps.image-url.outputs.value }}
+        run: docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
       # kustomize を設定する
       - name: Set up Kustomize
@@ -78,11 +73,7 @@ jobs:
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
         run: |-
-          ./kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
+          ./kustomize edit set image gcr.io/$PROJECT_ID/$IMAGE:v1=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           ./kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
-
-# gcloud projects add-iam-policy-binding aihubble \
-#   --member=serviceAccount:mec-kaunsell-gke@aihubble.iam.gserviceaccount.com\
-#   --role=roles/storage.admin
