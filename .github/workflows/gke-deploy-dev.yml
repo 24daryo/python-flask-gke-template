@@ -30,25 +30,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - id: image-url
-      #   name: Create docker image url
-      #   run: |
-      #     echo "::set-output name=value::${{ env.REGISTRY_HOSTNAME }}/${{ secrets.GKE_PROJECT  }}/my-service:latest"
-
-      # - name: loud SDK
-      #   uses: google-github-actions/setup-gcloud@v0
-      #   with:
-      #     project_id: ${{ secrets.GKE_PROJECT }}
-
-      # - id: auth
-      #   name: "Authenticate to Google Cloud"
-      #   uses: google-github-actions/auth@v0.8.0
-      #   with:
-      #     create_credentials_file: "true"
-      #     workload_identity_provider: "projects/${{ env.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider"
-      #     service_account: "mec-kaunsell-gke@aihubble.iam.gserviceaccount.com"
-      #     access_token_lifetime: 1200s
-
       - id: "auth"
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v0"
@@ -66,14 +47,7 @@ jobs:
         with:
           project_id: aihubble
           cluster_name: mec-kaunsell-gke
-          location: asia-northeast1-b
-
-      # - name: gcloud auth login by workload identity
-      #   run: |-
-      #     gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-
-      # - name: Configure docker to use the gcloud cli
-      #   run: gcloud auth configure-docker --quiet
+          location: asia-northeast1
 
       # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する)
       - name: Build
