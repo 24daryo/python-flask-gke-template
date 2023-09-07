@@ -1,5 +1,5 @@
 # Use the Python 3.11-slim base image
-FROM --platform=linux/amd64 python:3.11-slim
+FROM --platform=linux/amd64 python:3.11-alpine
 
 # Set the environment variables
 ENV PYTHONUNBUFFERED True
