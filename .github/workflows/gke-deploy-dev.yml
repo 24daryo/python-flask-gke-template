@@ -67,6 +67,10 @@ jobs:
       #       --build-arg GITHUB_REF="$GITHUB_REF" \
       #       .
 
+      # これがないとDockerイメージをプッシュできないので、認証を通しておく
+      - name: Configure docker to use the gcloud cli
+        run: gcloud auth configure-docker --quiet
+
       # Docker イメージを Google Container Registry にプッシュする
       - name: Push the docker image to Container Registry
         run: docker push ${{ steps.image-url.outputs.value }}
@@ -88,3 +92,7 @@ jobs:
           ../../kustomize build . | kubectl apply -f -
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
+
+# gcloud projects add-iam-policy-binding aihubble \
+#   --member=serviceAccount:mec-kaunsell-gke@aihubble.iam.gserviceaccount.com\
+#   --role=roles/storage.admin
