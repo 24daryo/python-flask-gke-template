@@ -1,4 +1,4 @@
-# Use the Python 3.11-slim base image
+# Use the Python 3.11-alpine base image
 FROM --platform=linux/amd64 python:3.11-alpine
 
 # Set the environment variables
