@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gke-test-rn
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-app-rn
+  template:
+    metadata:
+      labels:
+        app: hello-app-rn
+    spec:
+      containers:
+        - name: hello-app-rn
+          image: asia.gcr.io/aihubble/my-service:latest
+          ports:
+            - containerPort: 5000
