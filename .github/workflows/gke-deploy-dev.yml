@@ -85,5 +85,8 @@ jobs:
           echo "Deploying image: gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
           ../../kustomize edit set image gcr.io/$PROJECT_ID/$IMAGE:v1=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA
           ../../kustomize build . | kubectl apply -f -
+
+      - name: Deploy2(分けて検証)
+        run: |-
           kubectl rollout status deployment/$DEPLOYMENT_NAME
           kubectl get services -o wide
