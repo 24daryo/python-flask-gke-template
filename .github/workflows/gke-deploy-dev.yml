@@ -75,6 +75,9 @@ jobs:
       #     kubectl rollout status deployment/$DEPLOYMENT_NAME
       #     kubectl get services -o wide
 
+      - name: Configure docker to use the gcloud cli
+        run: gcloud auth configure-docker --quiet
+
       - name: Deploy revision
         if: ${{ github.event_name == 'push'}}
         run: |
