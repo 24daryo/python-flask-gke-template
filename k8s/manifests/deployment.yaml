@@ -17,3 +17,4 @@ spec:
           image: gcr.io/aihubble/hello-app-rn:latest
           ports:
             - containerPort: 5000
+  progressDeadlineSeconds: 60 # タイムアウトを設定
