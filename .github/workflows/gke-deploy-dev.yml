@@ -55,17 +55,17 @@ jobs:
           location: asia-northeast1
 
       # Dockerイメージにタグ（名前とバージョン）を付ける
-      # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する), 一旦コメントアウト
-      # - name: Build a docker image
-      #   run: docker build -t "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" .
+      # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する)
+      - name: Build a docker image
+        run: docker build -t "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" .
 
       # これがないとDockerイメージをプッシュできないので、認証を通しておく
       - name: Configure docker to use the gcloud cli
         run: gcloud auth configure-docker --quiet
 
-      # Docker イメージを Google Container Registry にプッシュする, 一旦コメントアウト
-      # - name: Push the docker image to Container Registry
-      #   run: docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+      # Docker イメージを Google Container Registry にプッシュする
+      - name: Push the docker image to Container Registry
+        run: docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
 
       # kustomize を設定する(Kustomizeツールがインストールし、実行権限を付与)
       # - name: Set up Kustomize
