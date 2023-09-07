@@ -49,6 +49,12 @@ jobs:
           cluster_name: mec-kaunsell-gke
           location: asia-northeast1
 
+      # Dockerイメージにタグ（名前とバージョン）を付ける
+      - id: image-url
+        name: Create docker image url
+        run: |
+          echo "::set-output name=value::${{ env.REGISTRY_HOSTNAME }}/${{ env.PROJECT_ID }}/my-service:latest"
+
       # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する)
       - name: Build a docker image
         run: |
