@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: hello-app-rn
-          image: gcr.io/aihubble/my-service:latest
+          image: gcr.io/aihubble/hello-app-rn:latest
           ports:
             - containerPort: 5000
