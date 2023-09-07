@@ -57,7 +57,8 @@ jobs:
       # Dockerイメージにタグ（名前とバージョン）を付ける
       # Docker イメージをビルドする(.の箇所にはDockerfileのフォルダパスを指定する)
       - name: Build a docker image
-        run: docker build \
+        run: |-
+          docker build \
           --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
