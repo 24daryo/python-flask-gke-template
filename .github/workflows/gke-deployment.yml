@@ -43,9 +43,9 @@ jobs:
       - name: Set up GKE credentials
         uses: google-github-actions/get-gke-credentials@v1
         with:
-          project_id: ${{ secrets.GKE_PROJECT }}
-          cluster_name: ${{ secrets.GKE_CLUSTER }}
-          location: ${{ secrets.GKE_ZONE }}
+          project_id: aihubble
+          cluster_name: mec-kaunsell-gke
+          location: asia-northeast1
 
       # Build the Docker image
       - name: Build
