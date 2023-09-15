@@ -37,32 +37,31 @@ metadata:
     tier: web
 spec:
   ports:
-    - port: 80
+    - port: 8080
       targetPort: 8080
   selector:
     app: python-app
     tier: web
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: python-ingress
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_set_headers "X-Frame-Options: Deny";
-      more_set_headers "X-Xss-Protection: 1; mode=block";
-      more_set_headers "X-Content-Type-Options: nosniff";
-spec:
-  rules:
-    - host: microservices.cloudageskill.com
-      http:
-        paths:
-          - backend:
-              service:
-                name: python-app-service
-                port:
-                  number: 8080
-            path: /
-            pathType: ImplementationSpecific
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: python-ingress
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+#     nginx.ingress.kubernetes.io/configuration-snippet: |
+#       more_set_headers "X-Frame-Options: Deny";
+#       more_set_headers "X-Xss-Protection: 1; mode=block";
+#       more_set_headers "X-Content-Type-Options: nosniff";
+# spec:
+#   rules:
+#     - host: microservices.cloudageskill.com
+#       http:
+#         paths:
+#           - backend:
+#               service:
+#                 name: python-app-service
+#                 port:
+#                   number: 8080
+#             path: /
+#             pathType: ImplementationSpecific
