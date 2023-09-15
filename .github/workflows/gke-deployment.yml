@@ -71,8 +71,3 @@ jobs:
         run: |-
           sed -i -e 's/GITHUB_SHA/'"$GITHUB_SHA"'/' ${{ github.workspace }}/.github/manifests/deployment.yml
           kubectl apply -f ${{ github.workspace }}/.github/manifests/deployment.yml
-
-      # Check the external IP address
-      - name: IP Check
-        run: |-
-          kubectl get services
