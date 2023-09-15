@@ -11,7 +11,7 @@ on:
       - development
       - main
 
-env:
+env: # ここで指定することで、deployment.ymlでも参照可能になる
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }} # Add your cluster name here.
   GKE_ZONE: ${{ secrets.GKE_ZONE }} # Add your cluster zone here.
