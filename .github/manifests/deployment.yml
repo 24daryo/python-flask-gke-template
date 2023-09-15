@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: python-app-hello-world
-          image: gcr.io/dogwood-method-347907/python-app:GITHUB_SHA
+          image: gcr.io/aihubble/python-app:GITHUB_SHA
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -34,12 +34,14 @@ metadata:
   name: python-app-service
   labels:
     app: python-app
+    tier: web
 spec:
   ports:
-    - port: 8080
+    - port: 80
       targetPort: 8080
   selector:
     app: python-app
+    tier: web
 
 ---
 apiVersion: networking.k8s.io/v1
