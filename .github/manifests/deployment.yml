@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: python-app-deployment
   labels:
-    app: python-app
+    app: python-app-deplyment-label # Deployment自体のラベル
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: python-app
+      app: python-app # ポッドのラベルを指定(template.metadata.labels.appと一致)
   template:
     metadata:
       labels:
-        app: python-app
+        app: python-app # ポッドのラベル
     spec:
       containers:
         - name: python-app-hello-world
