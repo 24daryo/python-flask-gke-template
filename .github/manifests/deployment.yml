@@ -8,11 +8,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: DEPLOYMENT_NAME # ポッドのラベルを指定(template.metadata.labels.appと一致)
+      app: python-app # ポッドのラベルを指定(template.metadata.labels.appと一致)
   template:
     metadata:
       labels:
-        app: DEPLOYMENT_NAME # ポッドのラベル
+        app: python-app # ポッドのラベル
     spec:
       containers:
         - name: python-app-hello-world
@@ -40,7 +40,7 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: DEPLOYMENT_NAME
+    app: python-app
   ports:
     - port: 80
       targetPort: 8080
