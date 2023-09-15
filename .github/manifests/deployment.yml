@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: python-app-hello-world
-          image: gcr.io/aihubble/python-app:GITHUB_SHA
+          image: gcr.io/aihubble/python-app:GITHUB_SHA # actionsで指定したpuahのイメージに合わせる必要あり
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
